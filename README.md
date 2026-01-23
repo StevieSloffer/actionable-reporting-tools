@@ -20,13 +20,14 @@ This system is a series of python files (and a config file) running via systemd,
 Deployed according to current Python standards with a venv instance of python3 to install modules. 
 
 **Config**: A config file which stores global variables to inform the flow and thresholds of this software<br/>
-**Database**: A helper file which handles all database connection and methods related to database interactions
-**Emailer**: A helper file which handles all the actions associated with sending email notifications. 
-[**Listener**](https://github.com/StevieSloffer/actionable-reporting-tools/blob/main/voipListener.py): A systemd python process that listens to a websocket feed delivered by VoIP server.
+**Database**: A helper file which handles all database connection and methods related to database interactions<br/>
+**Emailer**: A helper file which handles all the actions associated with sending email notifications. <br/>
+[**Listener**](https://github.com/StevieSloffer/actionable-reporting-tools/blob/main/voipListener.py): A systemd python process that listens to a websocket feed delivered by VoIP server. <br/>
 * **Notable packages used**: socket, threading, re
 * Listener examines every call as it terminates on the server and assesses if it was not answered.  
 * If call is missed, it pushed select information to a MariaDB/MySQL via Database module
-* Repeat forever!
+* Repeat forever!</br>
+
 **Watcher**: Running every (x) minutes via cron, the watcher examines the database for any missed calls that were not previously reported on.
 * If calls exceed limits set in config for various departments reporting requirements, an email report is created and sent to the people responsible for that store/department. 
 * The config sets over which period of time are calls checked (default being the previous hour) and how many calls need to be missed over that period before a report is generated. 
